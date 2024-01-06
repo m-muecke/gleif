@@ -13,7 +13,6 @@
 ^\.ccache$
 ^\.editorconfig$
 ^\.git$
-^\.gitea$
 ^\.github$
 ^\.gitignore$
 ^\.ignore$
