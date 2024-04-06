@@ -22,7 +22,7 @@ gleif_download <- function(url) {
   tf <- file.path(tmp, "tempfile.zip")
   utils::download.file(url, destfile = tf, quiet = TRUE, mode = "wb")
   file <- utils::unzip(tf, exdir = tmp)
-  mapping <- read.csv(file)
+  mapping <- utils::read.csv(file)
   setNames(mapping, tolower(names(mapping)))
 }
 
