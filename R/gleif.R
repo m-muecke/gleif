@@ -29,8 +29,12 @@ gleif_download <- function(url) {
 #' Download the latest LEI mapping data
 #'
 #' @param type `character(1)` the type of mapping data to download.
-#' @export
 #' @references <https://www.gleif.org/en/lei-data/lei-mapping>
+#' @export
+#' @examples
+#' \donttest{
+#' lei_mapping("isin")
+#' }
 lei_mapping <- function(type = c("isin", "bic", "mic", "oc")) {
   url <- latest_url(type)
   mapping <- gleif_download(url)

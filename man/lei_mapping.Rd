@@ -12,6 +12,11 @@ lei_mapping(type = c("isin", "bic", "mic", "oc"))
 \description{
 Download the latest LEI mapping data
 }
+\examples{
+\donttest{
+lei_mapping("isin")
+}
+}
 \references{
 \url{https://www.gleif.org/en/lei-data/lei-mapping}
 }

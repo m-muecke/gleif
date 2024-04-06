@@ -11,6 +11,7 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
+options(tibble.print_min = 5, tibble.print_max = 5)
 ```
 
 # gleif
@@ -28,4 +29,15 @@ You can install the development version of gleif from [GitHub](https://github.co
 ```{r, eval = FALSE}
 # install.packages("pak")
 pak::pak("m-muecke/gleif")
+```
+
+## Usage
+
+Currently on the download of the lei mapping data is supported.
+
+```{r}
+library(gleif)
+
+mapping <- lei_mapping("isin")
+mapping
 ```
