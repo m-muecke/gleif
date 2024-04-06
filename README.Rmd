@@ -33,7 +33,7 @@ pak::pak("m-muecke/gleif")
 
 ## Usage
 
-Currently on the download of the lei mapping data is supported.
+Currently only the download of the lei mapping data is supported.
 
 ```{r}
 library(gleif)
