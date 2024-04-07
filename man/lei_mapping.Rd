@@ -7,10 +7,15 @@
 lei_mapping(type = c("isin", "bic", "mic", "oc"))
 }
 \arguments{
-\item{type}{\code{character(1)} the type of mapping data to download.}
+\item{type}{\code{character(1)} the type of mapping data to download.
+One of \code{"isin"}, \code{"bic"}, \code{"mic"}, or \code{"oc"}. Default is \code{"isin"}.}
+}
+\value{
+A \code{data.frame()} with the lei and the corresponding mapping.
 }
 \description{
-Download the latest LEI mapping data
+Download the latest Legal Entity Identifier (LEI) mapping data from the
+Global Legal Entity Identifier Foundation (GLEIF).
 }
 \examples{
 \donttest{

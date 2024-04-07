@@ -1,6 +1,11 @@
 #' Download the latest LEI mapping data
 #'
+#' Download the latest Legal Entity Identifier (LEI) mapping data from the
+#' Global Legal Entity Identifier Foundation (GLEIF).
+#'
 #' @param type `character(1)` the type of mapping data to download.
+#'   One of `"isin"`, `"bic"`, `"mic"`, or `"oc"`. Default is `"isin"`.
+#' @returns A `data.frame()` with the lei and the corresponding mapping.
 #' @references <https://www.gleif.org/en/lei-data/lei-mapping>
 #' @export
 #' @examples
