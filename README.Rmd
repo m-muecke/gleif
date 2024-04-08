@@ -41,3 +41,7 @@ library(gleif)
 mapping <- lei_mapping("isin")
 mapping
 ```
+
+## Related work
+
+- [gleifr](https://github.com/Financial-Times/gleifr) - R package to support analysis of GLEIF data
