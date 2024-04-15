@@ -32,8 +32,8 @@ library(gleif)
 mapping <- lei_mapping("isin")
 mapping
 #> # A tibble: 7,340,831 × 2
-#>   lei                  isin        
-#>   <chr>                <chr>       
+#>   lei                  isin
+#>   <chr>                <chr>
 #> 1 001GPB6A9XPE8XJICC14 US3158052262
 #> 2 00EHHQ2ZHDCFXJCPCL46 US92204Q1031
 #> 3 00KLB2PFTM3060S2N216 US4138382027
