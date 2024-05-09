@@ -10,7 +10,11 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 [![R-CMD-check](https://github.com/m-muecke/gleif/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/m-muecke/gleif/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-The goal of gleif is to provide a simple interface to the …
+gleif is a minimal R client for the [gleif](https://www.gleif.org) API.
+A major challenge when dealing with financial data is the mapping of
+entities across different data sources. Especially when dealing with
+legal entities, the Legal Entity Identifier (LEI) can be used to
+uniquely identify entities.
 
 ## Installation
 
@@ -39,7 +43,7 @@ mapping
 #> 3 00KLB2PFTM3060S2N216 US4138382027
 #> 4 00KLB2PFTM3060S2N216 US4138385749
 #> 5 01ERPZV3DOLNXY2MLB90 US531554AA10
-#> # ℹ 7,340,826 more rows
+#> # ℹ 7,263,909 more rows
 ```
 
 ## Related work
