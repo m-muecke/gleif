@@ -3,6 +3,9 @@
 \name{lei_mapping}
 \alias{lei_mapping}
 \title{Download the latest LEI mapping data}
+\source{
+\url{https://www.gleif.org/en/lei-data/lei-mapping}
+}
 \usage{
 lei_mapping(type = c("isin", "bic", "mic", "oc"))
 }
@@ -21,7 +24,4 @@ Global Legal Entity Identifier Foundation (GLEIF).
 \donttest{
 lei_mapping("isin")
 }
-}
-\references{
-\url{https://www.gleif.org/en/lei-data/lei-mapping}
 }
