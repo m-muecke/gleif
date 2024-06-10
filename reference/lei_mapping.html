@@ -55,6 +55,10 @@ Global Legal Entity Identifier Foundation (GLEIF).</p>
     </div>
 
     <div class="section level2">
+    <h2 id="source">Source<a class="anchor" aria-label="anchor" href="#source"></a></h2>
+    <p><a href="https://www.gleif.org/en/lei-data/lei-mapping" class="external-link">https://www.gleif.org/en/lei-data/lei-mapping</a></p>
+    </div>
+    <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>type</dt>
 <dd><p><code>character(1)</code> the type of mapping data to download.
@@ -67,29 +71,12 @@ One of <code>"isin"</code>, <code>"bic"</code>, <code>"mic"</code>, or <code>"oc
 
 <p>A <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame()</a></code> with the lei and the corresponding mapping.</p>
     </div>
-    <div class="section level2">
-    <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
-    <p><a href="https://www.gleif.org/en/lei-data/lei-mapping" class="external-link">https://www.gleif.org/en/lei-data/lei-mapping</a></p>
-    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="fu">lei_mapping</span><span class="op">(</span><span class="st">"isin"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 7,296,969 × 2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    lei                  isin        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 001GPB6A9XPE8XJICC14 US3158052262</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 00EHHQ2ZHDCFXJCPCL46 US92204Q1031</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 00KLB2PFTM3060S2N216 US4138382027</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 00KLB2PFTM3060S2N216 US4138385749</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 01ERPZV3DOLNXY2MLB90 US531554AA10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 01ERPZV3DOLNXY2MLB90 US531554AB92</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 01ERPZV3DOLNXY2MLB90 US531554AC75</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 01ERPZV3DOLNXY2MLB90 US531554AD58</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 01ERPZV3DOLNXY2MLB90 US531554AE32</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 01ERPZV3DOLNXY2MLB90 US531554AF07</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7,296,959 more rows</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in open.connection(x, "rb"):</span> HTTP error 503.</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
