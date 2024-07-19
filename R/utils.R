@@ -1,9 +1,6 @@
-is_installed <- function(pkg) {
-  isTRUE(requireNamespace(pkg, quietly = TRUE))
-}
-
 as_tibble <- function(x) {
-  if (getOption("gleif.use_tibble", TRUE) && is_installed("tibble")) {
+  if (getOption("gleif.use_tibble", TRUE) &&
+        requireNamespace("tibble", quietly = TRUE)) {
     tibble::as_tibble(x)
   } else {
     x
