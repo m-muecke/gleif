@@ -10,13 +10,11 @@ repos:
         exclude: \.Rd$
       - id: file-contents-sorter
         files: ^\.Rbuildignore$
-      - id: trailing-whitespace
   - repo: https://github.com/lorenzwalthert/precommit
     rev: v0.4.2
     hooks:
       - id: roxygenize
         additional_dependencies:
-          - httr2
           - rvest
       - id: deps-in-desc
       - id: no-browser-statement
