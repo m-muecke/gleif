@@ -8,6 +8,8 @@
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![R-CMD-check](https://github.com/m-muecke/gleif/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/m-muecke/gleif/actions/workflows/R-CMD-check.yaml)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/gleif)](https://CRAN.R-project.org/package=gleif)
 <!-- badges: end -->
 
 gleif is a minimal R client for the [gleif](https://www.gleif.org) API.
@@ -35,15 +37,15 @@ library(gleif)
 
 mapping <- lei_mapping("isin")
 mapping
-#> # A tibble: 7,340,831 × 2
-#>   lei                  isin
-#>   <chr>                <chr>
+#> # A tibble: 7,137,616 × 2
+#>   lei                  isin        
+#>   <chr>                <chr>       
 #> 1 001GPB6A9XPE8XJICC14 US3158052262
 #> 2 00EHHQ2ZHDCFXJCPCL46 US92204Q1031
 #> 3 00KLB2PFTM3060S2N216 US4138382027
 #> 4 00KLB2PFTM3060S2N216 US4138385749
 #> 5 01ERPZV3DOLNXY2MLB90 US531554AA10
-#> # ℹ 7,263,909 more rows
+#> # ℹ 7,137,611 more rows
 ```
 
 ## Related work
