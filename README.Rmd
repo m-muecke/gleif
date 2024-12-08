@@ -11,7 +11,7 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
-options(tibble.print_min = 5L, tibble.print_max = 5L)
+options(str = strOptions(strict.width = "cut"))
 ```
 
 # gleif
@@ -27,6 +27,7 @@ A major challenge when dealing with financial data is the mapping of entities ac
 Especially when dealing with legal entities, the Legal Entity Identifier (LEI) can be used to uniquely identify entities.
 
 ## Installation
+
 You can install the development version of gleif from [GitHub](https://github.com/) with:
 
 ```{r, eval = FALSE}
@@ -42,7 +43,7 @@ Currently only the download of the lei mapping data is supported.
 library(gleif)
 
 mapping <- lei_mapping("isin")
-mapping
+str(mapping)
 ```
 
 ## Related work

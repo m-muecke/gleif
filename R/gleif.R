@@ -15,7 +15,7 @@
 lei_mapping <- function(type = c("isin", "bic", "mic", "oc")) {
   url <- latest_url(type)
   mapping <- gleif_download(url)
-  as_tibble(mapping)
+  mapping
 }
 
 latest_url <- function(type = c("isin", "bic", "mic", "oc")) {
