@@ -46,7 +46,7 @@ mapping <- lei_mapping("isin")
 head(mapping)
 
 records <- lei_records("001GPB6A9XPE8XJICC14", simplify = TRUE)
-head(records)
+str(records)
 ```
 
 ## Related work

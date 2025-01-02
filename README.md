@@ -46,21 +46,11 @@ head(mapping)
 #> 6 01ERPZV3DOLNXY2MLB90 US531554AB92
 
 records <- lei_records("001GPB6A9XPE8XJICC14", simplify = TRUE)
-head(records)
-#>                    lei                          name
-#> 1 001GPB6A9XPE8XJICC14        entity_legal_name_name
-#> 2 001GPB6A9XPE8XJICC14    entity_legal_name_language
-#> 3 001GPB6A9XPE8XJICC14       entity_other_names_name
-#> 4 001GPB6A9XPE8XJICC14   entity_other_names_language
-#> 5 001GPB6A9XPE8XJICC14       entity_other_names_type
-#> 6 001GPB6A9XPE8XJICC14 entity_legal_address_language
-#>                                                                       value
-#> 1                             Fidelity Advisor Leveraged Company Stock Fund
-#> 2                                                                        en
-#> 3 FIDELITY ADVISOR SERIES I - Fidelity Advisor Leveraged Company Stock Fund
-#> 4                                                                        en
-#> 5                                                       PREVIOUS_LEGAL_NAME
-#> 6                                                                        en
+str(records)
+#> 'data.frame':    37 obs. of  3 variables:
+#>  $ lei  : chr  "001GPB6A9XPE8XJICC14" "001GPB6A9XPE8XJICC14" "001GPB6A9XPE8XJ"..
+#>  $ name : chr  "entity_legal_name_name" "entity_legal_name_language" "entity_"..
+#>  $ value: chr  "Fidelity Advisor Leveraged Company Stock Fund" "en" "FIDELITY"..
 ```
 
 ## Related work
