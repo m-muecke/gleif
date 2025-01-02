@@ -36,17 +36,31 @@ Currently only the download of the lei mapping data is supported.
 library(gleif)
 
 mapping <- lei_mapping("isin")
-str(mapping)
-#> 'data.frame':    7248834 obs. of  2 variables:
-#>  $ lei : chr  "001GPB6A9XPE8XJICC14" "00EHHQ2ZHDCFXJCPCL46" "00KLB2PFTM3060S2"..
-#>  $ isin: chr  "US3158052262" "US92204Q1031" "US4138382027" "US4138385749" ...
+head(mapping)
+#>                    lei         isin
+#> 1 001GPB6A9XPE8XJICC14 US3158052262
+#> 2 00EHHQ2ZHDCFXJCPCL46 US92204Q1031
+#> 3 00KLB2PFTM3060S2N216 US4138382027
+#> 4 00KLB2PFTM3060S2N216 US4138385749
+#> 5 01ERPZV3DOLNXY2MLB90 US531554AA10
+#> 6 01ERPZV3DOLNXY2MLB90 US531554AB92
 
 records <- lei_records("001GPB6A9XPE8XJICC14", simplify = TRUE)
-str(records)
-#> 'data.frame':    37 obs. of  3 variables:
-#>  $ lei  : chr  "001GPB6A9XPE8XJICC14" "001GPB6A9XPE8XJICC14" "001GPB6A9XPE8XJ"..
-#>  $ name : chr  "entity_legal_name_name" "entity_legal_name_language" "entity_"..
-#>  $ value: chr  "Fidelity Advisor Leveraged Company Stock Fund" "en" "FIDELITY"..
+head(records)
+#>                    lei                          name
+#> 1 001GPB6A9XPE8XJICC14        entity_legal_name_name
+#> 2 001GPB6A9XPE8XJICC14    entity_legal_name_language
+#> 3 001GPB6A9XPE8XJICC14       entity_other_names_name
+#> 4 001GPB6A9XPE8XJICC14   entity_other_names_language
+#> 5 001GPB6A9XPE8XJICC14       entity_other_names_type
+#> 6 001GPB6A9XPE8XJICC14 entity_legal_address_language
+#>                                                                       value
+#> 1                             Fidelity Advisor Leveraged Company Stock Fund
+#> 2                                                                        en
+#> 3 FIDELITY ADVISOR SERIES I - Fidelity Advisor Leveraged Company Stock Fund
+#> 4                                                                        en
+#> 5                                                       PREVIOUS_LEGAL_NAME
+#> 6                                                                        en
 ```
 
 ## Related work
