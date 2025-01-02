@@ -85,21 +85,11 @@
 <span><span class="co">#&gt; 6 01ERPZV3DOLNXY2MLB90 US531554AB92</span></span>
 <span></span>
 <span><span class="va">records</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/lei_records.html">lei_records</a></span><span class="op">(</span><span class="st">"001GPB6A9XPE8XJICC14"</span>, simplify <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">records</span><span class="op">)</span></span>
-<span><span class="co">#&gt;                    lei                          name</span></span>
-<span><span class="co">#&gt; 1 001GPB6A9XPE8XJICC14        entity_legal_name_name</span></span>
-<span><span class="co">#&gt; 2 001GPB6A9XPE8XJICC14    entity_legal_name_language</span></span>
-<span><span class="co">#&gt; 3 001GPB6A9XPE8XJICC14       entity_other_names_name</span></span>
-<span><span class="co">#&gt; 4 001GPB6A9XPE8XJICC14   entity_other_names_language</span></span>
-<span><span class="co">#&gt; 5 001GPB6A9XPE8XJICC14       entity_other_names_type</span></span>
-<span><span class="co">#&gt; 6 001GPB6A9XPE8XJICC14 entity_legal_address_language</span></span>
-<span><span class="co">#&gt;                                                                       value</span></span>
-<span><span class="co">#&gt; 1                             Fidelity Advisor Leveraged Company Stock Fund</span></span>
-<span><span class="co">#&gt; 2                                                                        en</span></span>
-<span><span class="co">#&gt; 3 FIDELITY ADVISOR SERIES I - Fidelity Advisor Leveraged Company Stock Fund</span></span>
-<span><span class="co">#&gt; 4                                                                        en</span></span>
-<span><span class="co">#&gt; 5                                                       PREVIOUS_LEGAL_NAME</span></span>
-<span><span class="co">#&gt; 6                                                                        en</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">records</span><span class="op">)</span></span>
+<span><span class="co">#&gt; 'data.frame':    37 obs. of  3 variables:</span></span>
+<span><span class="co">#&gt;  $ lei  : chr  "001GPB6A9XPE8XJICC14" "001GPB6A9XPE8XJICC14" "001GPB6A9XPE8XJ"..</span></span>
+<span><span class="co">#&gt;  $ name : chr  "entity_legal_name_name" "entity_legal_name_language" "entity_"..</span></span>
+<span><span class="co">#&gt;  $ value: chr  "Fidelity Advisor Leveraged Company Stock Fund" "en" "FIDELITY"..</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="related-work">Related work<a class="anchor" aria-label="anchor" href="#related-work"></a>
