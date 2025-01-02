@@ -37,9 +37,16 @@ library(gleif)
 
 mapping <- lei_mapping("isin")
 str(mapping)
-#> 'data.frame':    7481018 obs. of  2 variables:
+#> 'data.frame':    7248834 obs. of  2 variables:
 #>  $ lei : chr  "001GPB6A9XPE8XJICC14" "00EHHQ2ZHDCFXJCPCL46" "00KLB2PFTM3060S2"..
 #>  $ isin: chr  "US3158052262" "US92204Q1031" "US4138382027" "US4138385749" ...
+
+records <- lei_records("001GPB6A9XPE8XJICC14", simplify = TRUE)
+str(records)
+#> 'data.frame':    37 obs. of  3 variables:
+#>  $ lei  : chr  "001GPB6A9XPE8XJICC14" "001GPB6A9XPE8XJICC14" "001GPB6A9XPE8XJ"..
+#>  $ name : chr  "entity_legal_name_name" "entity_legal_name_language" "entity_"..
+#>  $ value: chr  "Fidelity Advisor Leveraged Company Stock Fund" "en" "FIDELITY"..
 ```
 
 ## Related work

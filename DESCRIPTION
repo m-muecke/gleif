@@ -12,6 +12,7 @@ BugReports: https://github.com/m-muecke/gleif/issues
 Depends:
     R (>= 4.1.0)
 Imports:
+    httr2,
     rvest,
     stats,
     utils

@@ -44,6 +44,9 @@ library(gleif)
 
 mapping <- lei_mapping("isin")
 str(mapping)
+
+records <- lei_records("001GPB6A9XPE8XJICC14", simplify = TRUE)
+str(records)
 ```
 
 ## Related work
