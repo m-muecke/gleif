@@ -1,16 +1,20 @@
-is_bool <- function(x) {
+is_bool <- function(x, null_ok = FALSE) {
+  if (null_ok && is.null(x)) {
+    return(TRUE)
+  }
   is.logical(x) && length(x) == 1L
 }
 
-is_string <- function(x) {
+is_string <- function(x, null_ok = FALSE) {
+  if (null_ok && is.null(x)) {
+    return(TRUE)
+  }
   is.character(x) && length(x) == 1L && !is.na(x)
 }
 
-is_string_or_null <- function(x) {
-  is.null(x) || is_string(x)
-}
-
-is_count <- function(x) {
-  is.numeric(x) && length(x) == 1L && !is.na(x) &&
-    as.integer(x) == x && x > 0L
+is_count <- function(x, null_ok = FALSE) {
+  if (null_ok && is.null(x)) {
+    return(TRUE)
+  }
+  is.numeric(x) && length(x) == 1L && !is.na(x) && as.integer(x) == x && x > 0L
 }

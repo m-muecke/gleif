@@ -11,7 +11,7 @@ repos:
       - id: file-contents-sorter
         files: ^\.Rbuildignore$
   - repo: https://github.com/lorenzwalthert/precommit
-    rev: v0.4.3.9003
+    rev: v0.4.3.9011
     hooks:
       - id: roxygenize
         additional_dependencies:
@@ -20,6 +20,5 @@ repos:
       - id: deps-in-desc
       - id: no-browser-statement
       - id: parsable-R
-      - id: style-files
       - id: readme-rmd-rendered
       - id: use-tidy-description

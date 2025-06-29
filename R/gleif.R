@@ -14,8 +14,7 @@
 #' }
 lei_mapping <- function(type = c("isin", "bic", "mic", "oc")) {
   url <- latest_url(type)
-  mapping <- gleif_download(url)
-  mapping
+  gleif_download(url)
 }
 
 #' Fetch LEI records
@@ -33,12 +32,9 @@ lei_mapping <- function(type = c("isin", "bic", "mic", "oc")) {
 #' tab <- lei_records("529900W18LQJJN6SJ336", simplify = TRUE)
 #' tab <- lei_records(simplify = TRUE)
 #' }
-lei_records <- function(id = NULL,
-                        simplify = FALSE,
-                        page_size = 100L,
-                        page_number = 1L) {
+lei_records <- function(id = NULL, simplify = FALSE, page_size = 100L, page_number = 1L) {
   stopifnot(
-    is_string_or_null(id),
+    is_string(id, null_ok = TRUE),
     is_bool(simplify),
     is_count(page_size),
     is_count(page_number)
@@ -75,7 +71,10 @@ simplify_records <- function(x) {
   lei <- x[["lei"]]
   x <- x[names(x) != "lei"]
   data.frame(
-    lei = lei, name = names(x), value = unname(x), check.names = FALSE
+    lei = lei,
+    name = names(x),
+    value = unname(x),
+    check.names = FALSE
   )
 }
 
@@ -92,7 +91,8 @@ fetch_lei <- function(path, ...) {
 latest_url <- function(type = c("isin", "bic", "mic", "oc")) {
   type <- match.arg(type)
   url <- "https://www.gleif.org/en/lei-data/lei-mapping"
-  endpoint <- switch(type,
+  endpoint <- switch(
+    type,
     isin = "download-isin-to-lei-relationship-files",
     bic = "download-bic-to-lei-relationship-files",
     mic = "download-mic-to-lei-relationship-files",
