@@ -64,14 +64,10 @@ lei_records <- function(id = NULL, simplify = TRUE, page_size = 100L, page_numbe
   }
 
   if (has_id) {
-    x <- unlist(res$data$attributes)
-    tab <- simplify_records(x)
+    tab <- simplify_records(res$data$attributes)
   } else {
-    res <- lapply(res$data, function(x) {
-      x <- unlist(x$attributes)
-      simplify_records(x)
-    })
-    tab <- do.call(rbind, res)
+    val <- lapply(res$data, \(x) simplify_records(x$attributes))
+    tab <- do.call(rbind, val)
   }
   tab$name <- sub("\\.X$", "", tab$name)
   tab$name <- gsub(".", "_", tab$name, fixed = TRUE)
@@ -80,6 +76,7 @@ lei_records <- function(id = NULL, simplify = TRUE, page_size = 100L, page_numbe
 }
 
 simplify_records <- function(x) {
+  x <- unlist(x)
   lei <- x[["lei"]]
   x <- x[names(x) != "lei"]
   data.frame(
