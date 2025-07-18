@@ -4,12 +4,12 @@
 \alias{lei_records}
 \title{Fetch LEI records}
 \usage{
-lei_records(id = NULL, simplify = FALSE, page_size = 100L, page_number = 1L)
+lei_records(id = NULL, simplify = TRUE, page_size = 100L, page_number = 1L)
 }
 \arguments{
 \item{id}{(\code{character(1)}) the Legal Entity Identifier (LEI) to fetch.}
 
-\item{simplify}{(\code{logical(1)}) should the output be simplified?}
+\item{simplify}{(\code{logical(1)}) should the output be simplified? Default \code{TRUE}.}
 
 \item{page_size}{(\code{integer(1)}) the number of records to fetch.
 Only relevant when \code{id} is \code{NULL}. Default \code{100L}.}
@@ -18,14 +18,26 @@ Only relevant when \code{id} is \code{NULL}. Default \code{100L}.}
 Only relevant when \code{id} is \code{NULL}. Default \code{100L}.}
 }
 \value{
-A \code{data.frame()} or a named \code{list()} with the LEI records.
+When \code{simplify = TRUE}, a long-format \code{data.frame()} with columns:
+\describe{
+\item{lei}{The Legal Entity Identifier}
+\item{name}{The attribute name}
+\item{value}{The attribute value}
+}
+When \code{simplify = FALSE}, a named \code{list()} containing the raw API response.
 }
 \description{
 Fetch LEI records
 }
 \examples{
 \donttest{
-records <- lei_records("529900W18LQJJN6SJ336", simplify = TRUE)
-records <- lei_records(simplify = TRUE)
+# get simplified long-format `data.frame()`
+records <- lei_records("529900W18LQJJN6SJ336")
+
+# get raw API response as named `list()`
+records_raw <- lei_records("529900W18LQJJN6SJ336", simplify = FALSE)
+
+# fetch multiple records
+records <- lei_records()
 }
 }

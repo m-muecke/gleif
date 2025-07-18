@@ -30,10 +30,12 @@ pak::pak("m-muecke/gleif")
 
 ## Usage
 
-Currently only the download of the lei mapping data is supported.
+Currently the download of the lei mapping data adn the retrieval of
+records by LEI is supported:
 
 ``` r
 library(gleif)
+# fetch the latest LEI mapping data (single file with all mappings)
 
 mapping <- lei_mapping("isin")
 head(mapping)
@@ -45,7 +47,8 @@ head(mapping)
 #> 5 01ERPZV3DOLNXY2MLB90 US531554CN13
 #> 6 01ERPZV3DOLNXY2MLB90 US531554CP60
 
-records <- lei_records("001GPB6A9XPE8XJICC14", simplify = TRUE)
+# fetch LEI records by a given LEI identifier
+records <- lei_records("001GPB6A9XPE8XJICC14")
 str(records)
 #> 'data.frame':    37 obs. of  3 variables:
 #>  $ lei  : chr  "001GPB6A9XPE8XJICC14" "001GPB6A9XPE8XJICC14" "001GPB6A9XPE8XJ"..

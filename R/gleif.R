@@ -20,19 +20,31 @@ lei_mapping <- function(type = c("isin", "bic", "mic", "oc")) {
 #' Fetch LEI records
 #'
 #' @param id (`character(1)`) the Legal Entity Identifier (LEI) to fetch.
-#' @param simplify (`logical(1)`) should the output be simplified?
+#' @param simplify (`logical(1)`) should the output be simplified? Default `TRUE`.
 #' @param page_size (`integer(1)`) the number of records to fetch.
 #'   Only relevant when `id` is `NULL`. Default `100L`.
 #' @param page_number (`integer(1)`) the page number to fetch.
 #'   Only relevant when `id` is `NULL`. Default `100L`.
-#' @returns A `data.frame()` or a named `list()` with the LEI records.
+#' @returns When `simplify = TRUE`, a long-format `data.frame()` with columns:
+#'   \describe{
+#'     \item{lei}{The Legal Entity Identifier}
+#'     \item{name}{The attribute name}
+#'     \item{value}{The attribute value}
+#'   }
+#'   When `simplify = FALSE`, a named `list()` containing the raw API response.
 #' @export
 #' @examples
 #' \donttest{
-#' records <- lei_records("529900W18LQJJN6SJ336", simplify = TRUE)
-#' records <- lei_records(simplify = TRUE)
+#' # get simplified long-format `data.frame()`
+#' records <- lei_records("529900W18LQJJN6SJ336")
+#'
+#' # get raw API response as named `list()`
+#' records_raw <- lei_records("529900W18LQJJN6SJ336", simplify = FALSE)
+#'
+#' # fetch multiple records
+#' records <- lei_records()
 #' }
-lei_records <- function(id = NULL, simplify = FALSE, page_size = 100L, page_number = 1L) {
+lei_records <- function(id = NULL, simplify = TRUE, page_size = 100L, page_number = 1L) {
   stopifnot(
     is_string(id, null_ok = TRUE),
     is_bool(simplify),
