@@ -35,8 +35,8 @@ records by LEI is supported:
 
 ``` r
 library(gleif)
-# fetch the latest LEI mapping data (single file with all mappings)
 
+# fetch the latest LEI mapping data (single file with all mappings)
 mapping <- lei_mapping("isin")
 head(mapping)
 #>                    lei         isin
