@@ -25,12 +25,12 @@ lei_mapping <- function(type = c("isin", "bic", "mic", "oc")) {
 #'   Only relevant when `id` is `NULL`. Default `100L`.
 #' @param page_number (`integer(1)`) the page number to fetch.
 #'   Only relevant when `id` is `NULL`. Default `100L`.
-#' @returns The request LEI records.
+#' @returns A `data.frame()` or a named `list()` with the LEI records.
 #' @export
 #' @examples
 #' \donttest{
-#' tab <- lei_records("529900W18LQJJN6SJ336", simplify = TRUE)
-#' tab <- lei_records(simplify = TRUE)
+#' records <- lei_records("529900W18LQJJN6SJ336", simplify = TRUE)
+#' records <- lei_records(simplify = TRUE)
 #' }
 lei_records <- function(id = NULL, simplify = FALSE, page_size = 100L, page_number = 1L) {
   stopifnot(
@@ -107,12 +107,12 @@ latest_url <- function(type = c("isin", "bic", "mic", "oc")) {
 }
 
 gleif_download <- function(url) {
-  tmp <- tempfile()
-  dir.create(tmp)
-  on.exit(unlink(tmp, recursive = TRUE), add = TRUE)
-  tf <- file.path(tmp, "tempfile.zip")
+  td <- tempfile()
+  dir.create(td)
+  on.exit(unlink(td, recursive = TRUE), add = TRUE)
+  tf <- file.path(td, "tempfile.zip")
   utils::download.file(url, destfile = tf, quiet = TRUE, mode = "wb")
-  file <- utils::unzip(tf, exdir = tmp)
+  file <- utils::unzip(tf, exdir = td)
   mapping <- utils::read.csv(file)
   setNames(mapping, tolower(names(mapping)))
 }

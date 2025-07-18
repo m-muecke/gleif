@@ -18,14 +18,14 @@ Only relevant when \code{id} is \code{NULL}. Default \code{100L}.}
 Only relevant when \code{id} is \code{NULL}. Default \code{100L}.}
 }
 \value{
-The request LEI records.
+A \code{data.frame()} or a named \code{list()} with the LEI records.
 }
 \description{
 Fetch LEI records
 }
 \examples{
 \donttest{
-tab <- lei_records("529900W18LQJJN6SJ336", simplify = TRUE)
-tab <- lei_records(simplify = TRUE)
+records <- lei_records("529900W18LQJJN6SJ336", simplify = TRUE)
+records <- lei_records(simplify = TRUE)
 }
 }
