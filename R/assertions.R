@@ -1,4 +1,4 @@
-is_bool <- function(x, null_ok = FALSE) {
+is_flag <- function(x, null_ok = FALSE) {
   if (null_ok && is.null(x)) {
     return(TRUE)
   }

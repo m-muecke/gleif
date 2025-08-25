@@ -47,7 +47,7 @@ lei_mapping <- function(type = c("isin", "bic", "mic", "oc")) {
 lei_records <- function(id = NULL, simplify = TRUE, page_size = 100L, page_number = 1L) {
   stopifnot(
     is_string(id, null_ok = TRUE),
-    is_bool(simplify),
+    is_flag(simplify),
     is_count(page_size),
     is_count(page_number)
   )
