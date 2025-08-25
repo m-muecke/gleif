@@ -10,7 +10,8 @@
 lei_mapping(type = c("isin", "bic", "mic", "oc"))
 }
 \arguments{
-\item{type}{(\code{character(1)}) the type of mapping data to download.
+\item{type}{(\code{character(1)})\cr
+The type of mapping data to download.
 One of \code{"isin"}, \code{"bic"}, \code{"mic"}, or \code{"oc"}. Default is \code{"isin"}.}
 }
 \value{

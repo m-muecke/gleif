@@ -3,7 +3,8 @@
 #' Download the latest Legal Entity Identifier (LEI) mapping data from the
 #' Global Legal Entity Identifier Foundation (GLEIF).
 #'
-#' @param type (`character(1)`) the type of mapping data to download.
+#' @param type (`character(1)`)\cr
+#'   The type of mapping data to download.
 #'   One of `"isin"`, `"bic"`, `"mic"`, or `"oc"`. Default is `"isin"`.
 #' @returns A `data.frame()` with the lei and the corresponding mapping.
 #' @source <https://www.gleif.org/en/lei-data/lei-mapping>
@@ -19,12 +20,14 @@ lei_mapping <- function(type = c("isin", "bic", "mic", "oc")) {
 
 #' Fetch LEI records
 #'
-#' @param id (`character(1)`) the Legal Entity Identifier (LEI) to fetch.
-#' @param simplify (`logical(1)`) should the output be simplified? Default `TRUE`.
-#' @param page_size (`integer(1)`) the number of records to fetch.
-#'   Only relevant when `id` is `NULL`. Default `100L`.
-#' @param page_number (`integer(1)`) the page number to fetch.
-#'   Only relevant when `id` is `NULL`. Default `100L`.
+#' @param id (`character(1)`)\cr
+#'   The Legal Entity Identifier (LEI) to fetch.
+#' @param simplify (`logical(1)`)\cr
+#'   Should the output be simplified? Default `TRUE`.
+#' @param page_size (`integer(1)`)\cr
+#'   The number of records to fetch. Only relevant when `id` is `NULL`. Default `100L`.
+#' @param page_number (`integer(1)`)\cr
+#'   The page number to fetch. Only relevant when `id` is `NULL`. Default `100L`.
 #' @returns When `simplify = TRUE`, a long-format `data.frame()` with columns:
 #'   \describe{
 #'     \item{lei}{The Legal Entity Identifier}

@@ -7,15 +7,17 @@
 lei_records(id = NULL, simplify = TRUE, page_size = 100L, page_number = 1L)
 }
 \arguments{
-\item{id}{(\code{character(1)}) the Legal Entity Identifier (LEI) to fetch.}
+\item{id}{(\code{character(1)})\cr
+The Legal Entity Identifier (LEI) to fetch.}
 
-\item{simplify}{(\code{logical(1)}) should the output be simplified? Default \code{TRUE}.}
+\item{simplify}{(\code{logical(1)})\cr
+Should the output be simplified? Default \code{TRUE}.}
 
-\item{page_size}{(\code{integer(1)}) the number of records to fetch.
-Only relevant when \code{id} is \code{NULL}. Default \code{100L}.}
+\item{page_size}{(\code{integer(1)})\cr
+The number of records to fetch. Only relevant when \code{id} is \code{NULL}. Default \code{100L}.}
 
-\item{page_number}{(\code{integer(1)}) the page number to fetch.
-Only relevant when \code{id} is \code{NULL}. Default \code{100L}.}
+\item{page_number}{(\code{integer(1)})\cr
+The page number to fetch. Only relevant when \code{id} is \code{NULL}. Default \code{100L}.}
 }
 \value{
 When \code{simplify = TRUE}, a long-format \code{data.frame()} with columns:
