@@ -4,7 +4,7 @@
 \alias{lei_records}
 \title{Fetch LEI records}
 \usage{
-lei_records(id = NULL, simplify = TRUE, page_size = 100L, page_number = 1L)
+lei_records(id = NULL, simplify = TRUE, page_size = 200L, page_number = 1L)
 }
 \arguments{
 \item{id}{(\code{character(1)})\cr
@@ -14,10 +14,10 @@ The Legal Entity Identifier (LEI) to fetch.}
 Should the output be simplified? Default \code{TRUE}.}
 
 \item{page_size}{(\code{integer(1)})\cr
-The number of records to fetch. Only relevant when \code{id} is \code{NULL}. Default \code{100L}.}
+The number of records to fetch. Only relevant when \code{id} is \code{NULL}. Default \code{200L}.}
 
 \item{page_number}{(\code{integer(1)})\cr
-The page number to fetch. Only relevant when \code{id} is \code{NULL}. Default \code{100L}.}
+The page number to fetch. Only relevant when \code{id} is \code{NULL}. Default \code{200L}.}
 }
 \value{
 When \code{simplify = TRUE}, a long-format \code{data.frame()} with columns:

@@ -1,4 +1,5 @@
 #' @keywords internal
+#' @importFrom httr2 req_error
 #' @importFrom httr2 req_headers
 #' @importFrom httr2 req_headers
 #' @importFrom httr2 req_perform

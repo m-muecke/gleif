@@ -25,9 +25,9 @@ lei_mapping <- function(type = c("isin", "bic", "mic", "oc")) {
 #' @param simplify (`logical(1)`)\cr
 #'   Should the output be simplified? Default `TRUE`.
 #' @param page_size (`integer(1)`)\cr
-#'   The number of records to fetch. Only relevant when `id` is `NULL`. Default `100L`.
+#'   The number of records to fetch. Only relevant when `id` is `NULL`. Default `200L`.
 #' @param page_number (`integer(1)`)\cr
-#'   The page number to fetch. Only relevant when `id` is `NULL`. Default `100L`.
+#'   The page number to fetch. Only relevant when `id` is `NULL`. Default `200L`.
 #' @returns When `simplify = TRUE`, a long-format `data.frame()` with columns:
 #'   \describe{
 #'     \item{lei}{The Legal Entity Identifier}
@@ -47,7 +47,7 @@ lei_mapping <- function(type = c("isin", "bic", "mic", "oc")) {
 #' # fetch multiple records
 #' records <- lei_records()
 #' }
-lei_records <- function(id = NULL, simplify = TRUE, page_size = 100L, page_number = 1L) {
+lei_records <- function(id = NULL, simplify = TRUE, page_size = 200L, page_number = 1L) {
   stopifnot(
     is_string(id, null_ok = TRUE),
     is_flag(simplify),
@@ -96,8 +96,42 @@ fetch_lei <- function(path, ...) {
     req_url_path_append(path) |>
     req_url_query(!!!params) |>
     req_headers(Accept = "application/json") |>
+    req_error(body = lei_error_body) |>
     req_perform() |>
     resp_body_json()
+}
+
+fetch_lei_iter <- function(path, ...) {
+  params <- list(...)
+  req <- request("https://api.gleif.org/api/v1") |>
+    req_url_path_append(path) |>
+    req_url_query(!!!params) |>
+    req_headers(Accept = "application/json") |>
+    req_error(body = lei_error_body)
+
+  resps <- httr2::req_perform_iterative(
+    req,
+    next_req = httr2::iterate_with_offset(
+      "page[number]",
+      resp_pages = \(resp) resp_body_json(resp)$meta$pagination$lastPage
+    ),
+    max_reqs = 10L
+  )
+
+  browser()
+
+  data <- resps |>
+    httr2::resps_data(function(resp) {
+      data <- resp_body_json(resp)
+    })
+}
+
+lei_error_body <- function(resp) {
+  content_type <- httr2::resp_content_type(resp)
+  if (content_type %in% c("application/json", "application/vnd.api+json")) {
+    json <- resp_body_json(resp)
+    vapply(json$errors, \(x) x$title, character(1L))
+  }
 }
 
 latest_url <- function(type = c("isin", "bic", "mic", "oc")) {
