@@ -30,7 +30,7 @@ pak::pak("m-muecke/gleif")
 
 ## Usage
 
-Currently the download of the lei mapping data adn the retrieval of
+Currently the download of the lei mapping data and the retrieval of
 records by LEI is supported:
 
 ``` r
@@ -40,12 +40,12 @@ library(gleif)
 mapping <- lei_mapping("isin")
 head(mapping)
 #>                    lei         isin
-#> 1 001GPB6A9XPE8XJICC14 US3158052262
-#> 2 00EHHQ2ZHDCFXJCPCL46 US92204Q1031
-#> 3 00KLB2PFTM3060S2N216 US4138382027
-#> 4 00KLB2PFTM3060S2N216 US4138385749
-#> 5 01ERPZV3DOLNXY2MLB90 US531554CN13
-#> 6 01ERPZV3DOLNXY2MLB90 US531554CP60
+#> 1 00EHHQ2ZHDCFXJCPCL46 US92204Q1031
+#> 2 00KLB2PFTM3060S2N216 US4138382027
+#> 3 01ERPZV3DOLNXY2MLB90 US531554CN13
+#> 4 01ERPZV3DOLNXY2MLB90 US531554CP60
+#> 5 01KWVG908KE7RKPTNP46 US43785QQZ99
+#> 6 01KWVG908KE7RKPTNP46 US43785QRA30
 
 # fetch LEI records by a given LEI identifier
 records <- lei_records("001GPB6A9XPE8XJICC14")
