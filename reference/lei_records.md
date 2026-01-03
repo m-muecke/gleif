@@ -12,7 +12,7 @@ lei_records(id = NULL, simplify = TRUE, page_size = 200L, page_number = 1L)
 
 - id:
 
-  (`character(1)`)  
+  (`NULL` \| `character(1)`)  
   The Legal Entity Identifier (LEI) to fetch.
 
 - simplify:
@@ -63,7 +63,7 @@ records <- lei_records("529900W18LQJJN6SJ336")
 # get raw API response as named `list()`
 records_raw <- lei_records("529900W18LQJJN6SJ336", simplify = FALSE)
 
-# fetch multiple records
+# fetch available records
 records <- lei_records()
 # }
 ```

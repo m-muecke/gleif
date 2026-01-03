@@ -52,7 +52,7 @@
 
 
 <dl><dt id="arg-id">id<a class="anchor" aria-label="anchor" href="#arg-id"></a></dt>
-<dd><p>(<code>character(1)</code>)<br>
+<dd><p>(<code>NULL</code> | <code>character(1)</code>)<br>
 The Legal Entity Identifier (LEI) to fetch.</p></dd>
 
 
@@ -95,7 +95,7 @@ The page number to fetch. Only relevant when <code>id</code> is <code>NULL</code
 <span class="r-in"><span><span class="co"># get raw API response as named `list()`</span></span></span>
 <span class="r-in"><span><span class="va">records_raw</span> <span class="op">&lt;-</span> <span class="fu">lei_records</span><span class="op">(</span><span class="st">"529900W18LQJJN6SJ336"</span>, simplify <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># fetch multiple records</span></span></span>
+<span class="r-in"><span><span class="co"># fetch available records</span></span></span>
 <span class="r-in"><span><span class="va">records</span> <span class="op">&lt;-</span> <span class="fu">lei_records</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
