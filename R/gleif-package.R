@@ -7,6 +7,7 @@
 #' @importFrom httr2 req_url_query
 #' @importFrom httr2 request
 #' @importFrom httr2 resp_body_json
+#' @importFrom httr2 resp_content_type
 #' @importFrom httr2 url_parse
 #' @importFrom stats setNames
 "_PACKAGE"

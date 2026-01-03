@@ -127,10 +127,10 @@ fetch_lei_iter <- function(path, ...) {
 }
 
 lei_error_body <- function(resp) {
-  content_type <- httr2::resp_content_type(resp)
+  content_type <- resp_content_type(resp)
   if (content_type %in% c("application/json", "application/vnd.api+json")) {
     json <- resp_body_json(resp)
-    vapply(json$errors, \(x) x$title, character(1L))
+    vapply(json$errors, \(x) x$title, "")
   }
 }
 
