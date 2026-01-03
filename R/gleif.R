@@ -20,7 +20,7 @@ lei_mapping <- function(type = c("isin", "bic", "mic", "oc")) {
 
 #' Fetch LEI records
 #'
-#' @param id (`character(1)`)\cr
+#' @param id (`NULL` | `character(1)`)\cr
 #'   The Legal Entity Identifier (LEI) to fetch.
 #' @param simplify (`logical(1)`)\cr
 #'   Should the output be simplified? Default `TRUE`.
@@ -44,7 +44,7 @@ lei_mapping <- function(type = c("isin", "bic", "mic", "oc")) {
 #' # get raw API response as named `list()`
 #' records_raw <- lei_records("529900W18LQJJN6SJ336", simplify = FALSE)
 #'
-#' # fetch multiple records
+#' # fetch available records
 #' records <- lei_records()
 #' }
 lei_records <- function(id = NULL, simplify = TRUE, page_size = 200L, page_number = 1L) {

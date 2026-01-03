@@ -7,7 +7,7 @@
 lei_records(id = NULL, simplify = TRUE, page_size = 200L, page_number = 1L)
 }
 \arguments{
-\item{id}{(\code{character(1)})\cr
+\item{id}{(\code{NULL} | \code{character(1)})\cr
 The Legal Entity Identifier (LEI) to fetch.}
 
 \item{simplify}{(\code{logical(1)})\cr
@@ -39,7 +39,7 @@ records <- lei_records("529900W18LQJJN6SJ336")
 # get raw API response as named `list()`
 records_raw <- lei_records("529900W18LQJJN6SJ336", simplify = FALSE)
 
-# fetch multiple records
+# fetch available records
 records <- lei_records()
 }
 }
