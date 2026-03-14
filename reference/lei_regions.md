@@ -21,7 +21,7 @@ A [`data.frame()`](https://rdrr.io/r/base/data.frame.html) with columns:
 ## Examples
 
 ``` r
-# \donttest{
-regions <- lei_regions()
-# }
+if (FALSE) { # \dontrun{
+lei_regions()
+} # }
 ```

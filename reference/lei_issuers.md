@@ -26,7 +26,7 @@ A [`data.frame()`](https://rdrr.io/r/base/data.frame.html) with columns:
 ## Examples
 
 ``` r
-# \donttest{
-issuers <- lei_issuers()
-# }
+if (FALSE) { # \dontrun{
+lei_issuers()
+} # }
 ```

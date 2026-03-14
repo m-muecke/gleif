@@ -44,11 +44,11 @@ response.
 ## Examples
 
 ``` r
-# \donttest{
+if (FALSE) { # \dontrun{
 # get direct parent
-parent <- lei_parents("529900W18LQJJN6SJ336")
+lei_parents("529900W18LQJJN6SJ336")
 
 # get ultimate parent
-parent <- lei_parents("529900W18LQJJN6SJ336", type = "ultimate")
-# }
+lei_parents("529900W18LQJJN6SJ336", type = "ultimate")
+} # }
 ```

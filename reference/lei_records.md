@@ -79,30 +79,14 @@ response.
 ## Examples
 
 ``` r
-# \donttest{
+if (FALSE) { # \dontrun{
 # get simplified long-format data.frame
-records <- lei_records("529900W18LQJJN6SJ336")
+lei_records("529900W18LQJJN6SJ336")
 
 # get raw API response as named list
-records_raw <- lei_records("529900W18LQJJN6SJ336", simplify = FALSE)
-
-# fetch available records
-records <- lei_records()
-#> iterating ■■■                                5% | ETA: 32s
-#> iterating ■■■■■                             15% | ETA: 27s
-#> iterating ■■■■■■■■■                         25% | ETA: 23s
-#> iterating ■■■■■■■■■■■                       35% | ETA: 20s
-#> iterating ■■■■■■■■■■■■■■■                   45% | ETA: 17s
-#> iterating ■■■■■■■■■■■■■■■■■                 55% | ETA: 14s
-#> iterating ■■■■■■■■■■■■■■■■■■■■■             65% | ETA: 11s
-#> iterating ■■■■■■■■■■■■■■■■■■■■■■■           75% | ETA:  8s
-#> iterating ■■■■■■■■■■■■■■■■■■■■■■■■■■■       85% | ETA:  5s
-#> iterating ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■     95% | ETA:  2s
-#> iterating ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100% | ETA:  0s
+lei_records("529900W18LQJJN6SJ336", simplify = FALSE)
 
 # search by legal name
-records <- lei_records(legal_name = "Deutsche Bank")
-#> iterating ■■■                                5% | ETA: 32s
-#> iterating ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100% | ETA:  0s
-# }
+lei_records(legal_name = "Deutsche Bank")
+} # }
 ```
