@@ -33,6 +33,15 @@ test_that("lei_parents validates inputs", {
   expect_error(lei_parents(id = "foo", simplify = "yes"))
 })
 
+test_that("lei_issuers returns expected format", {
+  skip_on_cran()
+  skip_if_offline()
+  res <- lei_issuers()
+  expect_s3_class(res, "data.frame")
+  expect_named(res, c("lei", "name", "marketing_name", "website", "accreditation_date"))
+  expect_gt(nrow(res), 0L)
+})
+
 test_that("lei_regions returns expected format", {
   skip_on_cran()
   skip_if_offline()

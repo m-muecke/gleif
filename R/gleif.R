@@ -158,6 +158,38 @@ lei_regions <- function() {
   do.call(rbind, rows)
 }
 
+#' Fetch LEI issuers
+#'
+#' Fetches the list of LEI issuers (Local Operating Units) from the GLEIF API.
+#'
+#' @returns A `data.frame()` with columns:
+#' - **lei**: The Legal Entity Identifier of the issuer
+#' - **name**: The issuer name
+#' - **marketing_name**: The marketing name
+#' - **website**: The issuer website
+#' - **accreditation_date**: The accreditation date
+#' @export
+#' @examples
+#' \donttest{
+#' issuers <- lei_issuers()
+#' }
+lei_issuers <- function() {
+  resp <- fetch_lei("lei-issuers", `page[size]` = 100L)
+  data <- resp$data
+  rows <- lapply(data, function(x) {
+    a <- x$attributes
+    data.frame(
+      lei = a$lei,
+      name = a$name,
+      marketing_name = a$marketingName %||% NA_character_,
+      website = a$website %||% NA_character_,
+      accreditation_date = a$accreditationDate %||% NA_character_,
+      check.names = FALSE
+    )
+  })
+  do.call(rbind, rows)
+}
+
 #' Fetch LEI parent records
 #'
 #' Fetches the direct or ultimate parent record of a given LEI.
