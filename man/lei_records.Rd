@@ -11,7 +11,7 @@ lei_records(
   status = NULL,
   fulltext = NULL,
   page_size = 200L,
-  page_number = 1L,
+  page_number = NULL,
   simplify = TRUE
 )
 }
@@ -31,11 +31,12 @@ Filter by entity status. Only relevant when \code{id} is \code{NULL}.}
 \item{fulltext}{(\code{NULL} | \code{character(1)})\cr
 Full-text search query. Only relevant when \code{id} is \code{NULL}.}
 
-\item{page_size}{(\code{integer(1)})\cr
-The number of records to fetch. Only relevant when \code{id} is \code{NULL}. Default \code{200L}.}
+\item{page_size}{(\code{NULL} | \code{integer(1)})\cr
+The number of records per page. Only relevant when \code{id} is \code{NULL}. Default \code{200L}.}
 
-\item{page_number}{(\code{integer(1)})\cr
-The page number to fetch. Only relevant when \code{id} is \code{NULL}. Default \code{1L}.}
+\item{page_number}{(\code{NULL} | \code{integer(1)})\cr
+The page number to fetch. Only relevant when \code{id} is \code{NULL}. When \code{NULL} (the default), all
+pages are fetched automatically.}
 
 \item{simplify}{(\code{logical(1)})\cr
 Should the output be simplified? Default \code{TRUE}.}

@@ -30,10 +30,11 @@ lei_mapping <- function(type = c("isin", "bic", "mic", "oc")) {
 #'   Filter by entity status. Only relevant when `id` is `NULL`.
 #' @param fulltext (`NULL` | `character(1)`)\cr
 #'   Full-text search query. Only relevant when `id` is `NULL`.
-#' @param page_size (`integer(1)`)\cr
-#'   The number of records to fetch. Only relevant when `id` is `NULL`. Default `200L`.
-#' @param page_number (`integer(1)`)\cr
-#'   The page number to fetch. Only relevant when `id` is `NULL`. Default `1L`.
+#' @param page_size (`NULL` | `integer(1)`)\cr
+#'   The number of records per page. Only relevant when `id` is `NULL`. Default `200L`.
+#' @param page_number (`NULL` | `integer(1)`)\cr
+#'   The page number to fetch. Only relevant when `id` is `NULL`. When `NULL` (the default), all
+#'   pages are fetched automatically.
 #' @param simplify (`logical(1)`)\cr
 #'   Should the output be simplified? Default `TRUE`.
 #' @returns When `simplify = TRUE`, a long-format `data.frame()` with columns:
@@ -64,7 +65,7 @@ lei_records <- function(
   status = NULL,
   fulltext = NULL,
   page_size = 200L,
-  page_number = 1L,
+  page_number = NULL,
   simplify = TRUE
 ) {
   stopifnot(
@@ -74,7 +75,7 @@ lei_records <- function(
     is_string(status, null_ok = TRUE),
     is_string(fulltext, null_ok = TRUE),
     is_count(page_size),
-    is_count(page_number),
+    is_count(page_number, null_ok = TRUE),
     is_flag(simplify)
   )
   has_id <- !is.null(id)
@@ -89,6 +90,21 @@ lei_records <- function(
   if (has_id) {
     path <- paste(path, id, sep = "/")
     res <- fetch_lei(path)
+  } else if (is.null(page_number)) {
+    data <- fetch_lei_iter(
+      path,
+      `page[size]` = page_size,
+      `filter[entity.legalName]` = legal_name,
+      `filter[entity.jurisdiction]` = jurisdiction,
+      `filter[entity.status]` = status,
+      `filter[fulltext]` = fulltext
+    )
+    if (!simplify) {
+      return(data)
+    }
+    val <- lapply(data, \(x) simplify_records(x$attributes))
+    tab <- do.call(rbind, val)
+    return(clean_names(tab))
   } else {
     res <- fetch_lei(
       path,
@@ -196,6 +212,25 @@ clean_names <- function(tab) {
   tab$name <- gsub(".", "_", tab$name, fixed = TRUE)
   tab$name <- convert_camel_case(tab$name)
   tab
+}
+
+fetch_lei_iter <- function(path, ...) {
+  params <- list(...)
+  req <- request("https://api.gleif.org/api/v1") |>
+    req_url_path_append(path) |>
+    req_url_query(!!!params) |>
+    req_headers(Accept = "application/json") |>
+    req_error(body = lei_error_body)
+
+  resps <- req_perform_iterative(
+    req,
+    next_req = iterate_with_offset(
+      "page[number]",
+      resp_pages = \(resp) resp_body_json(resp)$meta$pagination$lastPage
+    )
+  )
+
+  resps_data(resps, \(resp) resp_body_json(resp)$data)
 }
 
 fetch_lei <- function(path, ...) {
