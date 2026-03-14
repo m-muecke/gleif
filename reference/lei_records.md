@@ -5,7 +5,16 @@ Fetch LEI records
 ## Usage
 
 ``` r
-lei_records(id = NULL, simplify = TRUE, page_size = 200L, page_number = 1L)
+lei_records(
+  id = NULL,
+  legal_name = NULL,
+  jurisdiction = NULL,
+  status = NULL,
+  fulltext = NULL,
+  page_size = 200L,
+  page_number = 1L,
+  simplify = TRUE
+)
 ```
 
 ## Arguments
@@ -15,10 +24,25 @@ lei_records(id = NULL, simplify = TRUE, page_size = 200L, page_number = 1L)
   (`NULL` \| `character(1)`)  
   The Legal Entity Identifier (LEI) to fetch.
 
-- simplify:
+- legal_name:
 
-  (`logical(1)`)  
-  Should the output be simplified? Default `TRUE`.
+  (`NULL` \| `character(1)`)  
+  Filter by legal name. Only relevant when `id` is `NULL`.
+
+- jurisdiction:
+
+  (`NULL` \| `character(1)`)  
+  Filter by jurisdiction. Only relevant when `id` is `NULL`.
+
+- status:
+
+  (`NULL` \| `character(1)`)  
+  Filter by entity status. Only relevant when `id` is `NULL`.
+
+- fulltext:
+
+  (`NULL` \| `character(1)`)  
+  Full-text search query. Only relevant when `id` is `NULL`.
 
 - page_size:
 
@@ -30,24 +54,23 @@ lei_records(id = NULL, simplify = TRUE, page_size = 200L, page_number = 1L)
 
   (`integer(1)`)  
   The page number to fetch. Only relevant when `id` is `NULL`. Default
-  `200L`.
+  `1L`.
+
+- simplify:
+
+  (`logical(1)`)  
+  Should the output be simplified? Default `TRUE`.
 
 ## Value
 
 When `simplify = TRUE`, a long-format
 [`data.frame()`](https://rdrr.io/r/base/data.frame.html) with columns:
 
-- lei:
+- **lei**: The Legal Entity Identifier
 
-  The Legal Entity Identifier
+- **name**: The attribute name
 
-- name:
-
-  The attribute name
-
-- value:
-
-  The attribute value
+- **value**: The attribute value
 
 When `simplify = FALSE`, a named
 [`list()`](https://rdrr.io/r/base/list.html) containing the raw API
@@ -57,13 +80,16 @@ response.
 
 ``` r
 # \donttest{
-# get simplified long-format `data.frame()`
+# get simplified long-format data.frame
 records <- lei_records("529900W18LQJJN6SJ336")
 
-# get raw API response as named `list()`
+# get raw API response as named list
 records_raw <- lei_records("529900W18LQJJN6SJ336", simplify = FALSE)
 
 # fetch available records
 records <- lei_records()
+
+# search by legal name
+records <- lei_records(legal_name = "Deutsche Bank")
 # }
 ```
