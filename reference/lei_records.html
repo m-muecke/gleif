@@ -51,7 +51,7 @@
 <span>  status <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  fulltext <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  page_size <span class="op">=</span> <span class="fl">200L</span>,</span>
-<span>  page_number <span class="op">=</span> <span class="fl">1L</span>,</span>
+<span>  page_number <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  simplify <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -86,13 +86,14 @@ Full-text search query. Only relevant when <code>id</code> is <code>NULL</code>.
 
 
 <dt id="arg-page-size">page_size<a class="anchor" aria-label="anchor" href="#arg-page-size"></a></dt>
-<dd><p>(<code>integer(1)</code>)<br>
-The number of records to fetch. Only relevant when <code>id</code> is <code>NULL</code>. Default <code>200L</code>.</p></dd>
+<dd><p>(<code>NULL</code> | <code>integer(1)</code>)<br>
+The number of records per page. Only relevant when <code>id</code> is <code>NULL</code>. Default <code>200L</code>.</p></dd>
 
 
 <dt id="arg-page-number">page_number<a class="anchor" aria-label="anchor" href="#arg-page-number"></a></dt>
-<dd><p>(<code>integer(1)</code>)<br>
-The page number to fetch. Only relevant when <code>id</code> is <code>NULL</code>. Default <code>1L</code>.</p></dd>
+<dd><p>(<code>NULL</code> | <code>integer(1)</code>)<br>
+The page number to fetch. Only relevant when <code>id</code> is <code>NULL</code>. When <code>NULL</code> (the default), all
+pages are fetched automatically.</p></dd>
 
 
 <dt id="arg-simplify">simplify<a class="anchor" aria-label="anchor" href="#arg-simplify"></a></dt>
@@ -119,9 +120,22 @@ Should the output be simplified? Default <code>TRUE</code>.</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># fetch available records</span></span></span>
 <span class="r-in"><span><span class="va">records</span> <span class="op">&lt;-</span> <span class="fu">lei_records</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> iterating <span style="color: #00BB00;">■■■                             </span>   5% | ETA: 30s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> iterating <span style="color: #00BB00;">■■■■■                           </span>  15% | ETA: 26s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> iterating <span style="color: #00BB00;">■■■■■■■■■                       </span>  25% | ETA: 22s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> iterating <span style="color: #00BB00;">■■■■■■■■■■■                     </span>  35% | ETA: 19s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> iterating <span style="color: #00BB00;">■■■■■■■■■■■■■■■                 </span>  45% | ETA: 16s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> iterating <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■               </span>  55% | ETA: 13s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> iterating <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■           </span>  65% | ETA: 10s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> iterating <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■■         </span>  75% | ETA:  7s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> iterating <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■■■■■■     </span>  85% | ETA:  4s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> iterating <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■■■■■■■■   </span>  95% | ETA:  1s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> iterating <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ </span> 100% | ETA:  0s</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># search by legal name</span></span></span>
 <span class="r-in"><span><span class="va">records</span> <span class="op">&lt;-</span> <span class="fu">lei_records</span><span class="op">(</span>legal_name <span class="op">=</span> <span class="st">"Deutsche Bank"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> iterating <span style="color: #00BB00;">■■■                             </span>   5% | ETA: 31s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> iterating <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ </span> 100% | ETA:  0s</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>

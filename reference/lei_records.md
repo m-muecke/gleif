@@ -12,7 +12,7 @@ lei_records(
   status = NULL,
   fulltext = NULL,
   page_size = 200L,
-  page_number = 1L,
+  page_number = NULL,
   simplify = TRUE
 )
 ```
@@ -46,15 +46,15 @@ lei_records(
 
 - page_size:
 
-  (`integer(1)`)  
-  The number of records to fetch. Only relevant when `id` is `NULL`.
+  (`NULL` \| `integer(1)`)  
+  The number of records per page. Only relevant when `id` is `NULL`.
   Default `200L`.
 
 - page_number:
 
-  (`integer(1)`)  
-  The page number to fetch. Only relevant when `id` is `NULL`. Default
-  `1L`.
+  (`NULL` \| `integer(1)`)  
+  The page number to fetch. Only relevant when `id` is `NULL`. When
+  `NULL` (the default), all pages are fetched automatically.
 
 - simplify:
 
@@ -88,8 +88,21 @@ records_raw <- lei_records("529900W18LQJJN6SJ336", simplify = FALSE)
 
 # fetch available records
 records <- lei_records()
+#> iterating ■■■                                5% | ETA: 30s
+#> iterating ■■■■■                             15% | ETA: 26s
+#> iterating ■■■■■■■■■                         25% | ETA: 22s
+#> iterating ■■■■■■■■■■■                       35% | ETA: 19s
+#> iterating ■■■■■■■■■■■■■■■                   45% | ETA: 16s
+#> iterating ■■■■■■■■■■■■■■■■■                 55% | ETA: 13s
+#> iterating ■■■■■■■■■■■■■■■■■■■■■             65% | ETA: 10s
+#> iterating ■■■■■■■■■■■■■■■■■■■■■■■           75% | ETA:  7s
+#> iterating ■■■■■■■■■■■■■■■■■■■■■■■■■■■       85% | ETA:  4s
+#> iterating ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■     95% | ETA:  1s
+#> iterating ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100% | ETA:  0s
 
 # search by legal name
 records <- lei_records(legal_name = "Deutsche Bank")
+#> iterating ■■■                                5% | ETA: 31s
+#> iterating ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100% | ETA:  0s
 # }
 ```
