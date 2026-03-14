@@ -1,7 +1,6 @@
 #' @keywords internal
 #' @importFrom httr2 req_error
 #' @importFrom httr2 req_headers
-#' @importFrom httr2 req_headers
 #' @importFrom httr2 req_perform
 #' @importFrom httr2 req_url_path_append
 #' @importFrom httr2 req_url_query

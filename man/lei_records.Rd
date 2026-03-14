@@ -17,7 +17,7 @@ Should the output be simplified? Default \code{TRUE}.}
 The number of records to fetch. Only relevant when \code{id} is \code{NULL}. Default \code{200L}.}
 
 \item{page_number}{(\code{integer(1)})\cr
-The page number to fetch. Only relevant when \code{id} is \code{NULL}. Default \code{200L}.}
+The page number to fetch. Only relevant when \code{id} is \code{NULL}. Default \code{1L}.}
 }
 \value{
 When \code{simplify = TRUE}, a long-format \code{data.frame()} with columns:

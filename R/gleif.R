@@ -27,7 +27,7 @@ lei_mapping <- function(type = c("isin", "bic", "mic", "oc")) {
 #' @param page_size (`integer(1)`)\cr
 #'   The number of records to fetch. Only relevant when `id` is `NULL`. Default `200L`.
 #' @param page_number (`integer(1)`)\cr
-#'   The page number to fetch. Only relevant when `id` is `NULL`. Default `200L`.
+#'   The page number to fetch. Only relevant when `id` is `NULL`. Default `1L`.
 #' @returns When `simplify = TRUE`, a long-format `data.frame()` with columns:
 #'   \describe{
 #'     \item{lei}{The Legal Entity Identifier}
