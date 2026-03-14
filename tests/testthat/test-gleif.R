@@ -28,6 +28,15 @@ test_that("lei_records rejects id with filters", {
   )
 })
 
+test_that("lei_children validates inputs", {
+  expect_error(lei_children(id = 123))
+  expect_error(lei_children(id = "foo", simplify = "yes"))
+})
+
+test_that("lei_isins validates inputs", {
+  expect_error(lei_isins(id = 123))
+})
+
 test_that("lei_parents validates inputs", {
   expect_error(lei_parents(id = 123))
   expect_error(lei_parents(id = "foo", simplify = "yes"))
@@ -57,6 +66,24 @@ test_that("lei_records works with filters", {
   res <- lei_records(fulltext = "Deutsche Bank", page_size = 10L)
   expect_s3_class(res, "data.frame")
   expect_named(res, c("lei", "name", "value"))
+  expect_gt(nrow(res), 0L)
+})
+
+test_that("lei_children returns expected format", {
+  skip_on_cran()
+  skip_if_offline()
+  res <- lei_children("529900W18LQJJN6SJ336")
+  expect_s3_class(res, "data.frame")
+  expect_named(res, c("lei", "name", "value"))
+  expect_gt(nrow(res), 0L)
+})
+
+test_that("lei_isins returns expected format", {
+  skip_on_cran()
+  skip_if_offline()
+  res <- lei_isins("529900W18LQJJN6SJ336")
+  expect_s3_class(res, "data.frame")
+  expect_named(res, c("lei", "isin"))
   expect_gt(nrow(res), 0L)
 })
 

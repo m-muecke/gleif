@@ -224,6 +224,62 @@ lei_parents <- function(id, type = c("direct", "ultimate"), simplify = TRUE) {
   clean_names(tab)
 }
 
+#' Fetch LEI child records
+#'
+#' Fetches the direct child records of a given LEI.
+#'
+#' @param id (`character(1)`)\cr
+#'   The Legal Entity Identifier (LEI) to fetch the children for.
+#' @param simplify (`logical(1)`)\cr
+#'   Should the output be simplified? Default `TRUE`.
+#' @returns When `simplify = TRUE`, a long-format `data.frame()` with columns:
+#' - **lei**: The Legal Entity Identifier
+#' - **name**: The attribute name
+#' - **value**: The attribute value
+#'
+#' When `simplify = FALSE`, a named `list()` containing the raw API response.
+#' @export
+#' @examples
+#' \dontrun{
+#' lei_children("529900W18LQJJN6SJ336")
+#' }
+lei_children <- function(id, simplify = TRUE) {
+  stopifnot(is_string(id), is_flag(simplify))
+  path <- paste("lei-records", id, "direct-children", sep = "/")
+  data <- fetch_lei_iter(path, `page[size]` = 200L)
+  if (!simplify) {
+    return(data)
+  }
+  val <- lapply(data, \(x) simplify_records(x$attributes))
+  tab <- do.call(rbind, val)
+  clean_names(tab)
+}
+
+#' Fetch ISINs for a LEI
+#'
+#' Fetches the ISINs associated with a given LEI.
+#'
+#' @param id (`character(1)`)\cr
+#'   The Legal Entity Identifier (LEI) to fetch ISINs for.
+#' @returns A `data.frame()` with columns:
+#' - **lei**: The Legal Entity Identifier
+#' - **isin**: The ISIN
+#' @export
+#' @examples
+#' \dontrun{
+#' lei_isins("529900W18LQJJN6SJ336")
+#' }
+lei_isins <- function(id) {
+  stopifnot(is_string(id))
+  path <- paste("lei-records", id, "isins", sep = "/")
+  data <- fetch_lei_iter(path, `page[size]` = 200L)
+  rows <- lapply(data, function(x) {
+    a <- x$attributes
+    data.frame(lei = a$lei, isin = a$isin, check.names = FALSE)
+  })
+  do.call(rbind, rows)
+}
+
 simplify_records <- function(x) {
   x <- unlist(x)
   lei <- x[["lei"]]

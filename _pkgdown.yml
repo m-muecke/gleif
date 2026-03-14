@@ -7,6 +7,8 @@ template:
 reference:
   - title: LEI data
     contents:
+      - lei_children
+      - lei_isins
       - lei_issuers
       - lei_mapping
       - lei_parents
