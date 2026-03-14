@@ -2,6 +2,8 @@
 
 ## LEI data
 
+- [`lei_issuers()`](https://m-muecke.github.io/gleif/reference/lei_issuers.md)
+  : Fetch LEI issuers
 - [`lei_mapping()`](https://m-muecke.github.io/gleif/reference/lei_mapping.md)
   : Download the latest LEI mapping data
 - [`lei_parents()`](https://m-muecke.github.io/gleif/reference/lei_parents.md)

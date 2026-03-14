@@ -88,21 +88,21 @@ records_raw <- lei_records("529900W18LQJJN6SJ336", simplify = FALSE)
 
 # fetch available records
 records <- lei_records()
-#> iterating ■■■                                5% | ETA: 30s
-#> iterating ■■■■■                             15% | ETA: 26s
-#> iterating ■■■■■■■■■                         25% | ETA: 22s
-#> iterating ■■■■■■■■■■■                       35% | ETA: 19s
-#> iterating ■■■■■■■■■■■■■■■                   45% | ETA: 16s
-#> iterating ■■■■■■■■■■■■■■■■■                 55% | ETA: 13s
-#> iterating ■■■■■■■■■■■■■■■■■■■■■             65% | ETA: 10s
-#> iterating ■■■■■■■■■■■■■■■■■■■■■■■           75% | ETA:  7s
-#> iterating ■■■■■■■■■■■■■■■■■■■■■■■■■■■       85% | ETA:  4s
-#> iterating ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■     95% | ETA:  1s
+#> iterating ■■■                                5% | ETA: 32s
+#> iterating ■■■■■                             15% | ETA: 27s
+#> iterating ■■■■■■■■■                         25% | ETA: 23s
+#> iterating ■■■■■■■■■■■                       35% | ETA: 20s
+#> iterating ■■■■■■■■■■■■■■■                   45% | ETA: 17s
+#> iterating ■■■■■■■■■■■■■■■■■                 55% | ETA: 14s
+#> iterating ■■■■■■■■■■■■■■■■■■■■■             65% | ETA: 11s
+#> iterating ■■■■■■■■■■■■■■■■■■■■■■■           75% | ETA:  8s
+#> iterating ■■■■■■■■■■■■■■■■■■■■■■■■■■■       85% | ETA:  5s
+#> iterating ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■     95% | ETA:  2s
 #> iterating ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100% | ETA:  0s
 
 # search by legal name
 records <- lei_records(legal_name = "Deutsche Bank")
-#> iterating ■■■                                5% | ETA: 31s
+#> iterating ■■■                                5% | ETA: 32s
 #> iterating ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100% | ETA:  0s
 # }
 ```
