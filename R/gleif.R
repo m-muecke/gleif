@@ -10,7 +10,7 @@
 #' @source <https://www.gleif.org/en/lei-data/lei-mapping>
 #' @export
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' lei_mapping("isin")
 #' }
 lei_mapping <- function(type = c("isin", "bic", "mic", "oc")) {
@@ -45,18 +45,15 @@ lei_mapping <- function(type = c("isin", "bic", "mic", "oc")) {
 #' When `simplify = FALSE`, a named `list()` containing the raw API response.
 #' @export
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # get simplified long-format data.frame
-#' records <- lei_records("529900W18LQJJN6SJ336")
+#' lei_records("529900W18LQJJN6SJ336")
 #'
 #' # get raw API response as named list
-#' records_raw <- lei_records("529900W18LQJJN6SJ336", simplify = FALSE)
-#'
-#' # fetch available records
-#' records <- lei_records()
+#' lei_records("529900W18LQJJN6SJ336", simplify = FALSE)
 #'
 #' # search by legal name
-#' records <- lei_records(legal_name = "Deutsche Bank")
+#' lei_records(legal_name = "Deutsche Bank")
 #' }
 lei_records <- function(
   id = NULL,
@@ -139,8 +136,8 @@ lei_records <- function(
 #' - **name**: The region name
 #' @export
 #' @examples
-#' \donttest{
-#' regions <- lei_regions()
+#' \dontrun{
+#' lei_regions()
 #' }
 lei_regions <- function() {
   resp <- fetch_lei("regions", `page[size]` = 100L)
@@ -170,8 +167,8 @@ lei_regions <- function() {
 #' - **accreditation_date**: The accreditation date
 #' @export
 #' @examples
-#' \donttest{
-#' issuers <- lei_issuers()
+#' \dontrun{
+#' lei_issuers()
 #' }
 lei_issuers <- function() {
   resp <- fetch_lei("lei-issuers", `page[size]` = 100L)
@@ -208,12 +205,12 @@ lei_issuers <- function() {
 #' When `simplify = FALSE`, a named `list()` containing the raw API response.
 #' @export
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # get direct parent
-#' parent <- lei_parents("529900W18LQJJN6SJ336")
+#' lei_parents("529900W18LQJJN6SJ336")
 #'
 #' # get ultimate parent
-#' parent <- lei_parents("529900W18LQJJN6SJ336", type = "ultimate")
+#' lei_parents("529900W18LQJJN6SJ336", type = "ultimate")
 #' }
 lei_parents <- function(id, type = c("direct", "ultimate"), simplify = TRUE) {
   type <- match.arg(type)

@@ -55,17 +55,14 @@ When \code{simplify = FALSE}, a named \code{list()} containing the raw API respo
 Fetch LEI records
 }
 \examples{
-\donttest{
+\dontrun{
 # get simplified long-format data.frame
-records <- lei_records("529900W18LQJJN6SJ336")
+lei_records("529900W18LQJJN6SJ336")
 
 # get raw API response as named list
-records_raw <- lei_records("529900W18LQJJN6SJ336", simplify = FALSE)
-
-# fetch available records
-records <- lei_records()
+lei_records("529900W18LQJJN6SJ336", simplify = FALSE)
 
 # search by legal name
-records <- lei_records(legal_name = "Deutsche Bank")
+lei_records(legal_name = "Deutsche Bank")
 }
 }

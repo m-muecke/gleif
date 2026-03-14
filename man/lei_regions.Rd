@@ -18,7 +18,7 @@ A \code{data.frame()} with columns:
 Fetches the list of regions from the GLEIF API.
 }
 \examples{
-\donttest{
-regions <- lei_regions()
+\dontrun{
+lei_regions()
 }
 }

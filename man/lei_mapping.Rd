@@ -22,7 +22,7 @@ Download the latest Legal Entity Identifier (LEI) mapping data from the
 Global Legal Entity Identifier Foundation (GLEIF).
 }
 \examples{
-\donttest{
+\dontrun{
 lei_mapping("isin")
 }
 }
