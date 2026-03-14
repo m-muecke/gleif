@@ -302,6 +302,7 @@ clean_names <- function(tab) {
 fetch_lei_iter <- function(path, ...) {
   params <- list(...)
   req <- request("https://api.gleif.org/api/v1") |>
+    req_user_agent(gleif_user_agent()) |>
     req_url_path_append(path) |>
     req_url_query(!!!params) |>
     req_headers(Accept = "application/json") |>
@@ -322,6 +323,7 @@ fetch_lei_iter <- function(path, ...) {
 fetch_lei <- function(path, ...) {
   params <- list(...)
   request("https://api.gleif.org/api/v1") |>
+    req_user_agent(gleif_user_agent()) |>
     req_url_path_append(path) |>
     req_url_query(!!!params) |>
     req_headers(Accept = "application/json") |>
