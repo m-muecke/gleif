@@ -22,45 +22,83 @@ lei_mapping <- function(type = c("isin", "bic", "mic", "oc")) {
 #'
 #' @param id (`NULL` | `character(1)`)\cr
 #'   The Legal Entity Identifier (LEI) to fetch.
-#' @param simplify (`logical(1)`)\cr
-#'   Should the output be simplified? Default `TRUE`.
+#' @param legal_name (`NULL` | `character(1)`)\cr
+#'   Filter by legal name. Only relevant when `id` is `NULL`.
+#' @param jurisdiction (`NULL` | `character(1)`)\cr
+#'   Filter by jurisdiction. Only relevant when `id` is `NULL`.
+#' @param status (`NULL` | `character(1)`)\cr
+#'   Filter by entity status. Only relevant when `id` is `NULL`.
+#' @param fulltext (`NULL` | `character(1)`)\cr
+#'   Full-text search query. Only relevant when `id` is `NULL`.
 #' @param page_size (`integer(1)`)\cr
 #'   The number of records to fetch. Only relevant when `id` is `NULL`. Default `200L`.
 #' @param page_number (`integer(1)`)\cr
 #'   The page number to fetch. Only relevant when `id` is `NULL`. Default `1L`.
+#' @param simplify (`logical(1)`)\cr
+#'   Should the output be simplified? Default `TRUE`.
 #' @returns When `simplify = TRUE`, a long-format `data.frame()` with columns:
-#'   \describe{
-#'     \item{lei}{The Legal Entity Identifier}
-#'     \item{name}{The attribute name}
-#'     \item{value}{The attribute value}
-#'   }
-#'   When `simplify = FALSE`, a named `list()` containing the raw API response.
+#' - **lei**: The Legal Entity Identifier
+#' - **name**: The attribute name
+#' - **value**: The attribute value
+#'
+#' When `simplify = FALSE`, a named `list()` containing the raw API response.
 #' @export
 #' @examples
 #' \donttest{
-#' # get simplified long-format `data.frame()`
+#' # get simplified long-format data.frame
 #' records <- lei_records("529900W18LQJJN6SJ336")
 #'
-#' # get raw API response as named `list()`
+#' # get raw API response as named list
 #' records_raw <- lei_records("529900W18LQJJN6SJ336", simplify = FALSE)
 #'
 #' # fetch available records
 #' records <- lei_records()
+#'
+#' # search by legal name
+#' records <- lei_records(legal_name = "Deutsche Bank")
 #' }
-lei_records <- function(id = NULL, simplify = TRUE, page_size = 200L, page_number = 1L) {
+lei_records <- function(
+  id = NULL,
+  legal_name = NULL,
+  jurisdiction = NULL,
+  status = NULL,
+  fulltext = NULL,
+  page_size = 200L,
+  page_number = 1L,
+  simplify = TRUE
+) {
   stopifnot(
     is_string(id, null_ok = TRUE),
-    is_flag(simplify),
+    is_string(legal_name, null_ok = TRUE),
+    is_string(jurisdiction, null_ok = TRUE),
+    is_string(status, null_ok = TRUE),
+    is_string(fulltext, null_ok = TRUE),
     is_count(page_size),
-    is_count(page_number)
+    is_count(page_number),
+    is_flag(simplify)
   )
   has_id <- !is.null(id)
+  has_filter <- !is.null(legal_name) ||
+    !is.null(jurisdiction) ||
+    !is.null(status) ||
+    !is.null(fulltext)
+  if (has_id && has_filter) {
+    stop("Cannot combine `id` with filter parameters.", call. = FALSE)
+  }
   path <- "lei-records"
   if (has_id) {
     path <- paste(path, id, sep = "/")
     res <- fetch_lei(path)
   } else {
-    res <- fetch_lei(path, `page[size]` = page_size, `page[number]` = page_number)
+    res <- fetch_lei(
+      path,
+      `page[size]` = page_size,
+      `page[number]` = page_number,
+      `filter[entity.legalName]` = legal_name,
+      `filter[entity.jurisdiction]` = jurisdiction,
+      `filter[entity.status]` = status,
+      `filter[fulltext]` = fulltext
+    )
   }
   if (!simplify) {
     return(res)
@@ -72,10 +110,73 @@ lei_records <- function(id = NULL, simplify = TRUE, page_size = 200L, page_numbe
     val <- lapply(res$data, \(x) simplify_records(x$attributes))
     tab <- do.call(rbind, val)
   }
-  tab$name <- sub("\\.X$", "", tab$name)
-  tab$name <- gsub(".", "_", tab$name, fixed = TRUE)
-  tab$name <- convert_camel_case(tab$name)
-  tab
+  clean_names(tab)
+}
+
+#' Fetch LEI regions
+#'
+#' Fetches the list of regions from the GLEIF API.
+#'
+#' @returns A `data.frame()` with columns:
+#' - **code**: The region code
+#' - **language**: The language of the region name
+#' - **name**: The region name
+#' @export
+#' @examples
+#' \donttest{
+#' regions <- lei_regions()
+#' }
+lei_regions <- function() {
+  resp <- fetch_lei("regions", `page[size]` = 100L)
+  data <- resp$data
+  rows <- lapply(data, function(x) {
+    code <- x$attributes$code
+    nms <- x$attributes$names
+    data.frame(
+      code = code,
+      language = vapply(nms, \(y) y$language, NA_character_),
+      name = vapply(nms, \(y) y$name, NA_character_),
+      check.names = FALSE
+    )
+  })
+  do.call(rbind, rows)
+}
+
+#' Fetch LEI parent records
+#'
+#' Fetches the direct or ultimate parent record of a given LEI.
+#'
+#' @param id (`character(1)`)\cr
+#'   The Legal Entity Identifier (LEI) to fetch the parent for.
+#' @param type (`character(1)`)\cr
+#'   The type of parent to fetch. One of `"direct"` or `"ultimate"`. Default is `"direct"`.
+#' @param simplify (`logical(1)`)\cr
+#'   Should the output be simplified? Default `TRUE`.
+#' @returns When `simplify = TRUE`, a long-format `data.frame()` with columns:
+#' - **lei**: The Legal Entity Identifier
+#' - **name**: The attribute name
+#' - **value**: The attribute value
+#'
+#' When `simplify = FALSE`, a named `list()` containing the raw API response.
+#' @export
+#' @examples
+#' \donttest{
+#' # get direct parent
+#' parent <- lei_parents("529900W18LQJJN6SJ336")
+#'
+#' # get ultimate parent
+#' parent <- lei_parents("529900W18LQJJN6SJ336", type = "ultimate")
+#' }
+lei_parents <- function(id, type = c("direct", "ultimate"), simplify = TRUE) {
+  type <- match.arg(type)
+  stopifnot(is_string(id), is_flag(simplify))
+  path <- paste("lei-records", id, paste0(type, "-parent"), sep = "/")
+  res <- fetch_lei(path)
+  if (!simplify) {
+    return(res)
+  }
+  tab <- simplify_records(res$data$attributes)
+  clean_names(tab)
 }
 
 simplify_records <- function(x) {
@@ -90,6 +191,13 @@ simplify_records <- function(x) {
   )
 }
 
+clean_names <- function(tab) {
+  tab$name <- sub("\\.X$", "", tab$name)
+  tab$name <- gsub(".", "_", tab$name, fixed = TRUE)
+  tab$name <- convert_camel_case(tab$name)
+  tab
+}
+
 fetch_lei <- function(path, ...) {
   params <- list(...)
   request("https://api.gleif.org/api/v1") |>
@@ -99,31 +207,6 @@ fetch_lei <- function(path, ...) {
     req_error(body = lei_error_body) |>
     req_perform() |>
     resp_body_json()
-}
-
-fetch_lei_iter <- function(path, ...) {
-  params <- list(...)
-  req <- request("https://api.gleif.org/api/v1") |>
-    req_url_path_append(path) |>
-    req_url_query(!!!params) |>
-    req_headers(Accept = "application/json") |>
-    req_error(body = lei_error_body)
-
-  resps <- httr2::req_perform_iterative(
-    req,
-    next_req = httr2::iterate_with_offset(
-      "page[number]",
-      resp_pages = \(resp) resp_body_json(resp)$meta$pagination$lastPage
-    ),
-    max_reqs = 10L
-  )
-
-  browser()
-
-  data <- resps |>
-    httr2::resps_data(function(resp) {
-      data <- resp_body_json(resp)
-    })
 }
 
 lei_error_body <- function(resp) {
@@ -161,8 +244,4 @@ gleif_download <- function(url) {
   file <- utils::unzip(tf, exdir = td)
   mapping <- utils::read.csv(file)
   setNames(mapping, tolower(names(mapping)))
-}
-
-convert_camel_case <- function(x) {
-  tolower(gsub("((?<=[a-z0-9])[A-Z]|(?!^)[A-Z](?=[a-z]))", "_\\1", x, perl = TRUE))
 }

@@ -4,28 +4,50 @@
 \alias{lei_records}
 \title{Fetch LEI records}
 \usage{
-lei_records(id = NULL, simplify = TRUE, page_size = 200L, page_number = 1L)
+lei_records(
+  id = NULL,
+  legal_name = NULL,
+  jurisdiction = NULL,
+  status = NULL,
+  fulltext = NULL,
+  page_size = 200L,
+  page_number = 1L,
+  simplify = TRUE
+)
 }
 \arguments{
 \item{id}{(\code{NULL} | \code{character(1)})\cr
 The Legal Entity Identifier (LEI) to fetch.}
 
-\item{simplify}{(\code{logical(1)})\cr
-Should the output be simplified? Default \code{TRUE}.}
+\item{legal_name}{(\code{NULL} | \code{character(1)})\cr
+Filter by legal name. Only relevant when \code{id} is \code{NULL}.}
+
+\item{jurisdiction}{(\code{NULL} | \code{character(1)})\cr
+Filter by jurisdiction. Only relevant when \code{id} is \code{NULL}.}
+
+\item{status}{(\code{NULL} | \code{character(1)})\cr
+Filter by entity status. Only relevant when \code{id} is \code{NULL}.}
+
+\item{fulltext}{(\code{NULL} | \code{character(1)})\cr
+Full-text search query. Only relevant when \code{id} is \code{NULL}.}
 
 \item{page_size}{(\code{integer(1)})\cr
 The number of records to fetch. Only relevant when \code{id} is \code{NULL}. Default \code{200L}.}
 
 \item{page_number}{(\code{integer(1)})\cr
 The page number to fetch. Only relevant when \code{id} is \code{NULL}. Default \code{1L}.}
+
+\item{simplify}{(\code{logical(1)})\cr
+Should the output be simplified? Default \code{TRUE}.}
 }
 \value{
 When \code{simplify = TRUE}, a long-format \code{data.frame()} with columns:
-\describe{
-\item{lei}{The Legal Entity Identifier}
-\item{name}{The attribute name}
-\item{value}{The attribute value}
+\itemize{
+\item \strong{lei}: The Legal Entity Identifier
+\item \strong{name}: The attribute name
+\item \strong{value}: The attribute value
 }
+
 When \code{simplify = FALSE}, a named \code{list()} containing the raw API response.
 }
 \description{
@@ -33,13 +55,16 @@ Fetch LEI records
 }
 \examples{
 \donttest{
-# get simplified long-format `data.frame()`
+# get simplified long-format data.frame
 records <- lei_records("529900W18LQJJN6SJ336")
 
-# get raw API response as named `list()`
+# get raw API response as named list
 records_raw <- lei_records("529900W18LQJJN6SJ336", simplify = FALSE)
 
 # fetch available records
 records <- lei_records()
+
+# search by legal name
+records <- lei_records(legal_name = "Deutsche Bank")
 }
 }
