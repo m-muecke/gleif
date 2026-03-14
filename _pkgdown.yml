@@ -14,3 +14,6 @@ reference:
       - lei_parents
       - lei_records
       - lei_regions
+  - title: Cache
+    contents:
+      - cache

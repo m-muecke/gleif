@@ -305,7 +305,8 @@ fetch_lei_iter <- function(path, ...) {
     req_url_path_append(path) |>
     req_url_query(!!!params) |>
     req_headers(Accept = "application/json") |>
-    req_error(body = lei_error_body)
+    req_error(body = lei_error_body) |>
+    req_gleif_cache()
 
   resps <- req_perform_iterative(
     req,
@@ -325,6 +326,7 @@ fetch_lei <- function(path, ...) {
     req_url_query(!!!params) |>
     req_headers(Accept = "application/json") |>
     req_error(body = lei_error_body) |>
+    req_gleif_cache() |>
     req_perform() |>
     resp_body_json()
 }
