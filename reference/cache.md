@@ -1,14 +1,14 @@
 # Get or manage the gleif API cache
 
 `gleif_cache_dir()` returns the path where cached API responses are
-stored. `gleif_cache_delete()` clears all cached responses.
+stored. `gleif_cache_clear()` clears all cached responses.
 
 ## Usage
 
 ``` r
 gleif_cache_dir()
 
-gleif_cache_delete()
+gleif_cache_clear()
 ```
 
 ## Details
@@ -28,6 +28,6 @@ options(gleif.cache = TRUE)
 gleif_cache_dir()
 
 # clear the cache
-gleif_cache_delete()
+gleif_cache_clear()
 } # }
 ```

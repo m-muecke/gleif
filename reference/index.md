@@ -20,5 +20,5 @@
 ## Cache
 
 - [`gleif_cache_dir()`](https://m-muecke.github.io/gleif/reference/cache.md)
-  [`gleif_cache_delete()`](https://m-muecke.github.io/gleif/reference/cache.md)
+  [`gleif_cache_clear()`](https://m-muecke.github.io/gleif/reference/cache.md)
   : Get or manage the gleif API cache
