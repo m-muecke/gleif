@@ -1,7 +1,7 @@
 #' Get or manage the gleif API cache
 #'
 #' `gleif_cache_dir()` returns the path where cached API responses are stored.
-#' `gleif_cache_delete()` clears all cached responses.
+#' `gleif_cache_clear()` clears all cached responses.
 #'
 #' @details
 #' The cache is only used when enabled with `options(gleif.cache = TRUE)`.
@@ -18,7 +18,7 @@
 #' gleif_cache_dir()
 #'
 #' # clear the cache
-#' gleif_cache_delete()
+#' gleif_cache_clear()
 #' }
 NULL
 
@@ -30,7 +30,7 @@ gleif_cache_dir <- function() {
 
 #' @rdname cache
 #' @export
-gleif_cache_delete <- function() {
+gleif_cache_clear <- function() {
   cache_dir <- gleif_cache_dir()
   if (dir.exists(cache_dir)) {
     unlink(dir(cache_dir, full.names = TRUE))

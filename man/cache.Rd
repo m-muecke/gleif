@@ -3,16 +3,16 @@
 \name{cache}
 \alias{cache}
 \alias{gleif_cache_dir}
-\alias{gleif_cache_delete}
+\alias{gleif_cache_clear}
 \title{Get or manage the gleif API cache}
 \usage{
 gleif_cache_dir()
 
-gleif_cache_delete()
+gleif_cache_clear()
 }
 \description{
 \code{gleif_cache_dir()} returns the path where cached API responses are stored.
-\code{gleif_cache_delete()} clears all cached responses.
+\code{gleif_cache_clear()} clears all cached responses.
 }
 \details{
 The cache is only used when enabled with \code{options(gleif.cache = TRUE)}.
@@ -28,6 +28,6 @@ options(gleif.cache = TRUE)
 gleif_cache_dir()
 
 # clear the cache
-gleif_cache_delete()
+gleif_cache_clear()
 }
 }
