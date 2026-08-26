@@ -77,7 +77,7 @@ test_that("lei_autocomplete validates inputs", {
 
 test_that("lei_autocomplete supports ownedBy searches", {
   local_mocked_bindings(
-    fetch_completions = function(path, field, q) field,
+    fetch_completions = \(path, field, q) field,
     .package = "gleifr"
   )
 
